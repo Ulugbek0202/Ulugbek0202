@@ -1,0 +1,458 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   DESIGN SYSTEM — Meridian Construction & Engineering
+   Premium minimalism · architectural brutalism · Swiss editorial typography
+   ========================================================================== */
+
+@theme {
+  /* ------------------------------------------------------------------ COLOR */
+  /* Neutrals — the structural palette. Charcoal carries authority,
+     warm white keeps the page from feeling clinical. */
+  --color-ink: #111315;
+  --color-ink-soft: #17191c;
+  --color-graphite: #202326;
+  --color-graphite-soft: #2a2e32;
+  --color-steel: #8a8d8f;
+  --color-steel-soft: #b9bcbe;
+  --color-steel-deep: #5c6063;
+  --color-bone: #f5f4f0;
+  --color-bone-deep: #e9e7e1;
+  --color-paper: #ffffff;
+
+  /* Accent — muted bronze. Used sparingly: rules, labels, active states. */
+  --color-bronze: #b58b55;
+  --color-bronze-light: #cfa877;
+  --color-bronze-dark: #8f6c3f;
+  --color-bronze-wash: #f2e9dc;
+
+  /* Semantic */
+  --color-success: #3f7d5c;
+  --color-warning: #b58b55;
+  --color-danger: #a5453b;
+
+  /* ------------------------------------------------------------- TYPOGRAPHY */
+  --font-display: var(--font-manrope), 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
+
+  /* Fluid editorial scale — every heading breathes with the viewport. */
+  --text-display: clamp(2.75rem, 7.5vw, 7.5rem);
+  --text-display--line-height: 0.94;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-hero: clamp(2.25rem, 5.4vw, 5.25rem);
+  --text-hero--line-height: 0.98;
+  --text-hero--letter-spacing: -0.03em;
+
+  --text-title: clamp(1.75rem, 3.4vw, 3.25rem);
+  --text-title--line-height: 1.06;
+  --text-title--letter-spacing: -0.025em;
+
+  --text-subtitle: clamp(1.35rem, 2.2vw, 2rem);
+  --text-subtitle--line-height: 1.18;
+  --text-subtitle--letter-spacing: -0.02em;
+
+  --text-lead: clamp(1.0625rem, 1.35vw, 1.3125rem);
+  --text-lead--line-height: 1.62;
+  --text-lead--letter-spacing: -0.011em;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.7;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.55;
+
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.22em;
+
+  /* --------------------------------------------------------------- SPACING */
+  --spacing-section: clamp(4.5rem, 9vw, 9rem);
+  --spacing-gutter: clamp(1.25rem, 4.2vw, 4.5rem);
+
+  /* ---------------------------------------------------------------- RADIUS */
+  /* Architectural brutalism: near-square. Radius is the exception, not a rule. */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  /* --------------------------------------------------------------- SHADOW */
+  --shadow-lift: 0 1px 2px rgb(17 19 21 / 0.04), 0 12px 32px -12px rgb(17 19 21 / 0.18);
+  --shadow-float: 0 2px 4px rgb(17 19 21 / 0.05), 0 32px 64px -24px rgb(17 19 21 / 0.28);
+
+  /* --------------------------------------------------------------- EASING */
+  --ease-architect: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ------------------------------------------------------------ ANIMATION */
+  --animate-marquee: marquee 48s linear infinite;
+  --animate-marquee-slow: marquee 72s linear infinite;
+  --animate-drift: drift 26s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-scroll-hint: scroll-hint 2.4s var(--ease-architect) infinite;
+
+  /* ------------------------------------------------------------ BREAKPOINTS */
+  --breakpoint-3xl: 120rem;
+
+  /* ------------------------------------------------------------ CONTAINERS */
+  --container-editorial: 84rem;
+  --container-wide: 96rem;
+}
+
+/* ==========================================================================
+   KEYFRAMES
+   ========================================================================== */
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.13) translate3d(-1.4%, -1.2%, 0);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -180% 0;
+  }
+  to {
+    background-position: 180% 0;
+  }
+}
+
+@keyframes scroll-hint {
+  0% {
+    transform: translateY(-60%);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(160%);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: color-mix(in oklab, var(--color-steel) 22%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--color-steel) transparent;
+  }
+
+  body {
+    background-color: var(--color-bone);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Accessible, on-brand focus ring. */
+  :focus-visible {
+    outline: 2px solid var(--color-bronze);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  ::selection {
+    background-color: var(--color-bronze);
+    color: var(--color-ink);
+  }
+
+  /* Discreet scrollbar on WebKit. */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bone-deep);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-steel-deep);
+    border: 3px solid var(--color-bone-deep);
+    border-radius: 999px;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+/* Page gutter + max width, the single source of horizontal rhythm. */
+@utility container-editorial {
+  width: 100%;
+  max-width: var(--container-editorial);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+@utility container-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+/* Full-bleed escape hatch for sections nested inside containers. */
+@utility bleed {
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+}
+
+/* Small uppercase label that opens most sections. */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* 1px architectural rule that reads as a drawn line, not a border. */
+@utility hairline {
+  border-top: 1px solid color-mix(in oklab, var(--color-steel) 28%, transparent);
+}
+
+@utility hairline-dark {
+  border-top: 1px solid color-mix(in oklab, var(--color-steel) 22%, transparent);
+}
+
+/* Fine film grain — lifts flat photography and dark sections. */
+@utility grain {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Editorial drop cap for the introduction paragraphs. */
+@utility dropcap {
+  &::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 3.4em;
+    line-height: 0.82;
+    font-weight: 500;
+    padding-right: 0.12em;
+    margin-top: 0.06em;
+    color: var(--color-bronze);
+  }
+}
+
+/* Underline that draws itself in from the left on hover. */
+@utility link-underline {
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-architect);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Diagonal hatch used on empty media frames and document thumbnails. */
+@utility hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in oklab, var(--color-steel) 16%, transparent) 0,
+    color-mix(in oklab, var(--color-steel) 16%, transparent) 1px,
+    transparent 1px,
+    transparent 9px
+  );
+}
+
+@utility text-shadow-hero {
+  text-shadow: 0 2px 40px rgb(0 0 0 / 0.42);
+}
+
+/* ==========================================================================
+   GRAIN OVERLAY
+   Applied via a pseudo-element so it never intercepts pointer events.
+   ========================================================================== */
+
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   COMPONENT PRIMITIVES
+   ========================================================================== */
+
+/* Skeleton shimmer for loading states. */
+.skeleton {
+  background-image: linear-gradient(
+    100deg,
+    transparent 20%,
+    color-mix(in oklab, var(--color-steel) 14%, transparent) 50%,
+    transparent 80%
+  );
+  background-size: 220% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* Native form control resets — no browser chrome, full design control. */
+.field-input {
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in oklab, var(--color-steel) 34%, transparent);
+  padding: 0.85rem 0;
+  font-size: 1rem;
+  transition: border-color 0.35s var(--ease-architect);
+}
+
+.field-input::placeholder {
+  color: color-mix(in oklab, var(--color-steel) 90%, transparent);
+}
+
+.field-input:hover {
+  border-bottom-color: color-mix(in oklab, var(--color-steel) 60%, transparent);
+}
+
+.field-input:focus {
+  outline: none;
+  border-bottom-color: var(--color-bronze);
+}
+
+.field-input[aria-invalid='true'] {
+  border-bottom-color: var(--color-danger);
+}
+
+select.field-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a8d8f' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  padding-right: 1.75rem;
+}
+
+select.field-input option {
+  background-color: var(--color-ink);
+  color: var(--color-bone);
+}
+
+/* Dark-surface variants. */
+.on-dark .field-input {
+  border-bottom-color: color-mix(in oklab, var(--color-bone) 26%, transparent);
+  color: var(--color-bone);
+}
+
+.on-dark .field-input:focus {
+  border-bottom-color: var(--color-bronze);
+}
+
+.on-dark .field-input[aria-invalid='true'] {
+  border-bottom-color: #d98b81;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY — reduced motion
+   Honours the OS setting: no parallax, no autoplay loops, no long transitions.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .skeleton {
+    animation: none;
+    background-image: none;
+    background-color: var(--color-bone-deep);
+  }
+}
+
+/* Print — collapse dark sections so documents and pages print legibly. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
